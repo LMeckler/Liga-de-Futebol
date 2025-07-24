@@ -11,7 +11,7 @@ INSERT INTO tb_Pessoa (nome, cpf, data_Nascimento, id_Cidade) VALUES ('Bruno Hen
 INSERT INTO tb_Time (nome, id_Cidade, id_Estadio) VALUES ('Ipatinga FC', 1, 1), ('Cruzeiro', 2, 2), ('Flamengo', 3, 3), ('São Paulo FC', 4, 4);
 
 -- Usuario
---INSERT INTO tb_Usuario (login, senha, nivel_Acesso) VALUES ('Meckler', '123', 'ADMIN'), ('JP', '$123', 'USER');
+INSERT INTO tb_Usuario (login, senha, nivel_Acesso) VALUES ('ADM', '$2a$10$6dy99fRmhgrUh1LHraKmAO/28o6z0YBvVxLjt.JGCeFeiiRaLzqYq', 'ADMIN');
 
 -- Contrato
 INSERT INTO tb_Contrato (data_Inicio, data_Fim, tipo, funcao, situacao, observacao, id_Time, id_Pessoa) VALUES ('2024-01-01', '2025-12-31', 'definitivo', 'jogador', 'ativo', 'Contrato de demonstração jogador', 3, 1);

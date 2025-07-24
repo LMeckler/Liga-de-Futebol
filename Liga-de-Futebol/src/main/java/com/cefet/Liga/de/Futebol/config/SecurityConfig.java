@@ -38,51 +38,53 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll() // Acesso ao H2 Console
-                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll() // Acesso
-                                                                                                              // ao
-                                                                                                              // Swagger
-                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll() // Permitir criação de usuário
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll() // Acesso ao Swagger UI
+                        // USUARIOS
+                        .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() // Permitir endpoint de login
-                        .requestMatchers(HttpMethod.GET, "/usuarios").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/usuarios/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/usuarios").hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/{id}").hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
                         // Pessoas
-                        .requestMatchers(HttpMethod.GET, "/pessoas").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/pessoas/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/pessoas").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pessoas/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/pessoas").hasAnyRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/pessoas/**").hasAnyRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/pessoas/**").hasRole("ADMIN")
                         // Cidades
-                        .requestMatchers(HttpMethod.GET, "/cidades/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/cidades").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cidades/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cidades").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.PUT, "/cidades/**").hasRole("ADMIN")  
                         .requestMatchers(HttpMethod.DELETE, "/cidades/**").hasRole("ADMIN")
                         // Estadios
-                        .requestMatchers(HttpMethod.GET, "/estadios").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/estadios/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/estadios").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/estadios/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/estadios").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/estadios/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/estadios/**").hasRole("ADMIN")
                         // Times
-                        .requestMatchers(HttpMethod.GET, "/times").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/times/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/times").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/times/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/times").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/times/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/times/**").hasRole("ADMIN")
                         // Contratos
-                        .requestMatchers(HttpMethod.GET, "/contratos").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/contratos/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/contratos").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/contratos/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/contratos").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/contratos/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/contratos/**").hasRole("ADMIN")
                         // TimeRestricoes
-                        .requestMatchers(HttpMethod.GET, "/timerestricoes").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/timerestricoes/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/timerestricoes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/timerestricoes/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/timerestricoes").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/timerestricoes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/timerestricoes/**").hasRole("ADMIN")
                         // JogadoresRestricoes
-                        .requestMatchers(HttpMethod.GET, "/jogadorrestricoes").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/jogadorrestricoes/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/jogadorrestricoes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/jogadorrestricoes/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/jogadorrestricoes").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/jogadorrestricoes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/jogadorrestricoes/**").hasRole("ADMIN")
