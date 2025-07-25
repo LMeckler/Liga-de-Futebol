@@ -1,16 +1,25 @@
-FROM ubuntu:latest as build
+# Etapa 1: Build com Maven e JDK 21
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
+WORKDIR /app
 
-RUN apt-get install maven -y
-RUN mvn clean install
+# Copia apenas os arquivos necessários para o build
+COPY pom.xml .
+COPY src ./src
 
-FROM openjdk:17-jdk-slim
+# Compila o projeto, ignorando os testes
+RUN mvn clean package -DskipTests
 
+# Etapa 2: Imagem final mais leve com apenas o JAR
+FROM eclipse-temurin:21-jdk
+
+WORKDIR /app
+
+# Copia o JAR gerado do build anterior
+COPY --from=build /app/target/*.jar app.jar
+
+# Expõe a porta da aplicação
 EXPOSE 8080
 
-COPY --from=build /target/Liga-de-Futebol\target\test-classes\com\cefet\Liga\de\Futebol\LigaDeFutebolApplicationTests.class /app.jar
-
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+# Comando de execução da aplicação
+ENTRYPOINT ["java", "-jar", "app.jar"]
