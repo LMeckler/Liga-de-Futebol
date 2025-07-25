@@ -55,7 +55,7 @@ public class SecurityConfig {
                         // Cidades
                         .requestMatchers(HttpMethod.GET, "/cidades").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cidades/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/cidades").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/cidades").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/cidades/**").hasRole("ADMIN")  
                         .requestMatchers(HttpMethod.DELETE, "/cidades/**").hasRole("ADMIN")
                         // Estadios
