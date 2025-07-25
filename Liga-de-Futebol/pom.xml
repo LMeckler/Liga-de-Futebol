@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cefet</groupId>
-	<artifactId>StudioEssencial</artifactId>
+	<artifactId>LigaDeFutebol</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>StudioEssencial</name>
+	<name>LigaDeFutebol</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>
