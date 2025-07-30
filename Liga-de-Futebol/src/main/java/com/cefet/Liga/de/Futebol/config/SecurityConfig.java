@@ -1,5 +1,9 @@
 package com.cefet.Liga.de.Futebol.config;
 
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +26,17 @@ import com.cefet.Liga.de.Futebol.services.UsuarioDetailsService;
 
 @Configuration
 public class SecurityConfig {
+    // Configuração do PasswordEncoder (Configuração CORS)
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("https://ligafutebol.netlify.app" ));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+    }
     @Autowired
     private UsuarioDetailsService usuarioDetailsService;
 
