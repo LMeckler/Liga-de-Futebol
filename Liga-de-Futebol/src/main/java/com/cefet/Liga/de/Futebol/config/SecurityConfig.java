@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .cors().and()  
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/h2-console/**").permitAll() // Acesso ao H2 Console
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll() // Acesso ao Swagger UI
                         // USUARIOS
